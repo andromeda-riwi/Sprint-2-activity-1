@@ -1,12 +1,12 @@
-namespace DefaultNamespace;
+namespace Sprint_2.DTOs;
 
 public class UserDTO
 {
     public long Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Username { get; set; }
-    public string Email { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
     public string? Cellphone { get; set; }
     public string? Address  { get; set; }
     public string? City { get; set; }
@@ -21,11 +21,11 @@ public class UserDTO
 
 public class CreateUserDTO
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Username { get; set; }
-    public string Email { get; set; }
-    public string Password {  get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string Password {  get; set; } = string.Empty;
     public string? Cellphone { get; set; }
     public string? Address  { get; set; }
     public string? City { get; set; }
@@ -41,16 +41,16 @@ public class CreateUserDTO
 public class UserResponseDTO
 {
     public long Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Username { get; set; }
-    public string Email { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
 }
 
 public class UserUpdateDTO
 {
-    public string Username { get; set; }
-    public string Email { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
     public string? Cellphone { get; set; }
     public string? Address  { get; set; }
     public string? City { get; set; }
@@ -63,7 +63,7 @@ public class UserUpdateDTO
 
 public class UserChangePasswordDTO
 {
-    public string Password { get; set; }
-    public string NewPassword { get; set; }
+    public string Password { get; set; } = string.Empty;
+    public string NewPassword { get; set; } = string.Empty;
 }
 

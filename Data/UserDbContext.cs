@@ -1,14 +1,49 @@
 using Microsoft.EntityFrameworkCore;
-using Sprint-2-activity-1.Entities;
+using Sprint_2.Entities;
 
-namespace Sprint2.Data;
+namespace Sprint_2.Data;
 
-public class MysqlDbContext : DbContext
+public class UserDbContext : DbContext
 {
-    public DbSet<User> users { get; set; }
+    public DbSet<User> Users { get; set; }
+
+    public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
+    {
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseMySql(
-            "Server=168.119.183.3;Database=tren_andromeda;User=root;Password=g0tIFJEQsKHm5$34Pxu1;Port=3307",
-            new MySqlServerVersion(new Version(8, 0, 0)));
+    {
+        if (!options.IsConfigured)
+        {
+            options.UseMySql(
+                "Server=168.119.183.3;Database=tren_andromeda;User=root;Password=g0tIFJEQsKHm5$34Pxu1;Port=3307",
+                new MySqlServerVersion(new Version(8, 0, 0)));
+        }
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        // Configurar índices únicos
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Username)
+            .IsUnique();
+
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email)
+            .IsUnique();
+
+        // Configurar nombres de tabla y columnas
+        modelBuilder.Entity<User>()
+            .ToTable("Users");
+
+        modelBuilder.Entity<User>()
+            .Property(u => u.CreatedAt)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+        modelBuilder.Entity<User>()
+            .Property(u => u.UpdatedAt)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
+    }
 }
