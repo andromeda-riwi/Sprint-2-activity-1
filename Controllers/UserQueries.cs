@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Sprint_2.Entities;
+using Sprint_2.DTOs;
+using Sprint_2.Data;
 
-using Sprint2activity1;             
-using using Sprint-2-activity.1.Entities;   
-
-namespace DefaultNamespace.Controllers
+namespace Sprint_2.Controllers
 {
     public class UserQueries
     {
-        private readonly AppDbContext _context;
+        private readonly UserDbContext _context;
 
-        public UserQueries(AppDbContext context)
+        public UserQueries(UserDbContext context)
         {
             _context = context;
         }
@@ -23,7 +23,9 @@ namespace DefaultNamespace.Controllers
             int option;
             do
             {
-                Console.WriteLine("\n--- CONSULTAS AVANZADAS DE USUARIOS ---");
+                Console.Clear();
+                Console.WriteLine("=== CONSULTAS AVANZADAS DE USUARIOS ===");
+                Console.WriteLine();
                 Console.WriteLine("1.  Listar todos los usuarios registrados");
                 Console.WriteLine("2.  Ver detalle de un usuario por Id");
                 Console.WriteLine("3.  Ver detalle de un usuario por correo electrónico");
@@ -39,7 +41,8 @@ namespace DefaultNamespace.Controllers
                 Console.WriteLine("13. Listar usuarios sin dirección");
                 Console.WriteLine("14. Listar últimos usuarios registrados");
                 Console.WriteLine("15. Listar usuarios ordenados por apellido");
-                Console.WriteLine("0.  Volver");
+                Console.WriteLine("0.  Volver al menú principal");
+                Console.WriteLine();
                 Console.Write("Elige una opción: ");
 
                 if (!int.TryParse(Console.ReadLine(), out option)) option = -1;
@@ -61,8 +64,14 @@ namespace DefaultNamespace.Controllers
                     case 13: await UsersWithoutAddress(); break;
                     case 14: await LatestUsers(); break;
                     case 15: await UsersOrderedByLastName(); break;
-                    case 0: Console.WriteLine("Volviendo..."); break;
+                    case 0: Console.WriteLine("Volviendo al menú principal..."); break;
                     default: Console.WriteLine("Opción inválida."); break;
+                }
+
+                if (option != 0)
+                {
+                    Console.WriteLine("\nPresione Enter para continuar...");
+                    Console.ReadLine();
                 }
 
             } while (option != 0);
@@ -294,7 +303,7 @@ namespace DefaultNamespace.Controllers
             var list = await _context.Users
                 .Select(u => new {
                     FullName = (u.FirstName ?? "") + " " + (u.LastName ?? ""),
-                    u.Email
+                    Email = u.Email
                 })
                 .ToListAsync();
 

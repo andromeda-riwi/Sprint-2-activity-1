@@ -6,10 +6,12 @@ namespace Sprint_2.Menus;
 public class MainMenu
 {
     private readonly UsersController _usersController;
+    private readonly UserQueries _userQueries;
 
-    public MainMenu(UsersController usersController)
+    public MainMenu(UsersController usersController, UserQueries userQueries)
     {
         _usersController = usersController;
+        _userQueries = userQueries;
     }
 
     public async Task RunAsync()
@@ -20,7 +22,7 @@ public class MainMenu
             Console.WriteLine("=== SISTEMA DE GESTIÓN DE USUARIOS ===");
             Console.WriteLine();
             Console.WriteLine("Seleccione una opción:");
-            Console.WriteLine("1. Consultas de Usuarios");
+            Console.WriteLine("1. Consultas Básicas de Usuarios");
             Console.WriteLine("2. Gestión de Usuarios (Crear/Actualizar/Eliminar)");
             Console.WriteLine("3. Reportes y Estadísticas");
             Console.WriteLine("0. Salir");
@@ -1012,5 +1014,18 @@ public class MainMenu
             Console.WriteLine($"Edad: {user.Age} años");
         Console.WriteLine($"Creado: {user.CreatedAt:dd/MM/yyyy HH:mm}");
         Console.WriteLine($"Actualizado: {user.UpdatedAt:dd/MM/yyyy HH:mm}");
+    }
+
+    // Método para consultas avanzadas usando UserQueries
+    private async Task ShowAdvancedQueriesMenuAsync()
+    {
+        Console.Clear();
+        Console.WriteLine("=== CONSULTAS AVANZADAS DE USUARIOS ===");
+        Console.WriteLine();
+        Console.WriteLine("Iniciando sistema de consultas avanzadas...");
+        Console.WriteLine("Presione Enter para continuar...");
+        Console.ReadLine();
+        
+        await _userQueries.MenuAsync();
     }
 }

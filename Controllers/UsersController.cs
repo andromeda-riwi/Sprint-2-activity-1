@@ -4,9 +4,7 @@ using Sprint_2.Repositories;
 
 namespace Sprint_2.Controllers;
 
-namespace Sprint2.Controllers;
-
-public class UserController
+public class UsersController
 {
     private readonly IUserRepository _userRepository;
 
@@ -211,14 +209,14 @@ public class UserController
             LastName = createDto.LastName.Trim(),
             Username = createDto.Username.Trim(),
             Email = createDto.Email.Trim().ToLower(),
-            Password = createDto.Password,
+            Password = string.IsNullOrWhiteSpace(createDto.Password) ? null : createDto.Password,
             Cellphone = createDto.Cellphone?.Trim(),
             Address = createDto.Address?.Trim(),
             City = createDto.City?.Trim(),
             State = createDto.State?.Trim(),
             Zipcode = createDto.Zipcode?.Trim(),
             Country = createDto.Country?.Trim(),
-            Gender = createDto.Gender?.Trim(),
+            Gender = string.IsNullOrWhiteSpace(createDto.Gender) ? null : createDto.Gender.Trim(),
             Age = createDto.Age
         };
 
@@ -272,8 +270,9 @@ public class UserController
         if (string.IsNullOrWhiteSpace(createDto.Email))
             throw new ArgumentException("El correo electrónico es obligatorio.");
         
-        if (string.IsNullOrWhiteSpace(createDto.Password))
-            throw new ArgumentException("La contraseña es obligatoria.");
+        // Password es opcional según la base de datos
+        // if (string.IsNullOrWhiteSpace(createDto.Password))
+        //     throw new ArgumentException("La contraseña es obligatoria.");
     }
 
     private static bool IsValidEmail(string email)

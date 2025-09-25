@@ -47,9 +47,14 @@ class Program
 
         // Registrar controladores
         services.AddScoped<UsersController>();
+        services.AddScoped<UserQueries>();
 
         // Registrar menús
-        services.AddScoped<MainMenu>();
+        services.AddScoped<MainMenu>(provider => 
+            new MainMenu(
+                provider.GetRequiredService<UsersController>(),
+                provider.GetRequiredService<UserQueries>()
+            ));
 
         return services.BuildServiceProvider();
     }
