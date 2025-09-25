@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 using Sprint2activity1;             
-using using Sprint-2-activity.1.Entities;   
+using using Sprint2activity1.Entities;   
 
 namespace DefaultNamespace.Controllers
 {
