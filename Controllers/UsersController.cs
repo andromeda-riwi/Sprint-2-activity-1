@@ -4,7 +4,9 @@ using Sprint_2.Repositories;
 
 namespace Sprint_2.Controllers;
 
-public class UsersController
+namespace Sprint2.Controllers;
+
+public class UserController
 {
     private readonly IUserRepository _userRepository;
 

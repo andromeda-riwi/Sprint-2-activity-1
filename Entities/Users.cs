@@ -2,6 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sprint_2.Entities;
 
+
+
+[Table("users")] 
 public class User
 {
     public long Id { get; set; }
