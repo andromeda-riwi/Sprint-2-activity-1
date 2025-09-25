@@ -1,68 +1,56 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Sprint_2_activity_1.Entities;
-
+namespace Sprint_2.Entities;
 
 [Table("users")] 
 public class User
 {
-    [Key] 
-    [Column("id")] // Mapea la propiedad 'Id' a la columna 'id' en la BD.
     public long Id { get; set; }
-
-    [Required]
-    [Column("first_name")]
-    public string FirstName { get; set; }
-
-    [Required]
-    [Column("last_name")]
-    public string LastName { get; set; }
-
-    [Required]
-    [Column("username")]
-    public string Username { get; set; }
-
-    [Required]
-    [Column("email")]
-    public string Email { get; set; }
-
-
-    [Required]
-    [Column("password")]
-    public string PasswordHash { get; set; }
-
     
-    [Column("phone")]
-    public string? Phone { get; set; } // Añadí este campo que estaba en tu BD.
-
-    [Column("cellphone")]
+    [Required]
+    [MaxLength(255)]
+    public string FirstName { get; set; } = string.Empty;
+    
+    [Required]
+    [MaxLength(255)]
+    public string LastName { get; set; } = string.Empty;
+    
+    [Required]
+    [MaxLength(255)]
+    public string Username { get; set; } = string.Empty;
+    
+    [Required]
+    [MaxLength(255)]
+    public string Email { get; set; } = string.Empty;
+    
+    [MaxLength(255)]
+    public string? Password { get; set; }
+    
+    [MaxLength(255)]
     public string? Cellphone { get; set; }
-
-    [Column("address")]
+    
+    [MaxLength(255)]
     public string? Address { get; set; }
-
-    [Column("city")]
+    
+    [MaxLength(255)]
     public string? City { get; set; }
-
-    [Column("state")]
+    
+    [MaxLength(255)]
     public string? State { get; set; }
-
-    [Column("zipcode")]
+    
+    [MaxLength(20)]
     public string? Zipcode { get; set; }
-
-    [Column("country")]
+    
+    [MaxLength(255)]
     public string? Country { get; set; }
-
-    [Column("gender")]
+    
+    [MaxLength(20)]
     public string? Gender { get; set; }
-
-    [Column("age")]
+    
     public int? Age { get; set; }
-
-    [Column("created_at")]
+    
     public DateTime? CreatedAt { get; set; }
-
-    [Column("updated_at")]
+    
     public DateTime? UpdatedAt { get; set; }
 }
